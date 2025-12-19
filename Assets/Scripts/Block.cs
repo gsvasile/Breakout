@@ -19,11 +19,6 @@ namespace Breakout
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-        }
-
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (!other.gameObject.CompareTag("Ball"))
