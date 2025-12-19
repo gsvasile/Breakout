@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Breakout.Controllers
 {
@@ -26,6 +27,11 @@ namespace Breakout.Controllers
             {
                 myRigidBody = rigidBoy;
             }
+        }
+
+        private void FixedUpdate()
+        {
+            myRigidBody.linearVelocity = myRigidBody.linearVelocity.normalized * speed;
         }
 
         public void LaunchBall()
