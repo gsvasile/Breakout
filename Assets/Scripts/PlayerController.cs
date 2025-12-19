@@ -24,13 +24,8 @@ namespace Breakout.Controllers
 
         private void AutoSetRigidBody()
         {
-            if (_myRigidBody != null)
-            {
-                return;
-            }
-
             var rigidBody = GetComponent<Rigidbody2D>();
-            if (rigidBody != null)
+            if (rigidBody)
             {
                 _myRigidBody = rigidBody;
             }

@@ -5,8 +5,9 @@ namespace Breakout.Controllers
 {
     public class BallController : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D myRigidBody;
         [SerializeField] private float speed = 2;
+
+        private Rigidbody2D _myRigidBody;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
@@ -17,21 +18,11 @@ namespace Breakout.Controllers
 
         private void AutoSetRigidBody()
         {
-            if (myRigidBody != null)
-            {
-                return;
-            }
-
             var rigidBoy = GetComponent<Rigidbody2D>();
-            if (rigidBoy != null)
+            if (rigidBoy)
             {
-                myRigidBody = rigidBoy;
+                _myRigidBody = rigidBoy;
             }
-        }
-
-        private void FixedUpdate()
-        {
-            myRigidBody.linearVelocity = myRigidBody.linearVelocity.normalized * speed;
         }
 
         public void LaunchBall()
@@ -57,7 +48,12 @@ namespace Breakout.Controllers
                 }
             }
 
-            myRigidBody.linearVelocity = new Vector2(x, y) * speed;
+            _myRigidBody.linearVelocity = new Vector2(x, y) * speed;
+        }
+
+        private void FixedUpdate()
+        {
+            _myRigidBody.linearVelocity = _myRigidBody.linearVelocity.normalized * speed;
         }
     }
 }
