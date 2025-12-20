@@ -5,16 +5,15 @@ namespace Breakout
     public class Block : MonoBehaviour
     {
         [SerializeField] private int health = 1;
-        [SerializeField] private int points = 100; 
+        [SerializeField] private int points = 100;
+        [SerializeField] private GameManager gameManager;
 
         private SpriteRenderer _spriteRenderer;
-        private GameManager _gameManager;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
             AutoSetSpriteRenderer();
-            _gameManager = FindFirstObjectByType<GameManager>();
         }
 
         private void AutoSetSpriteRenderer()
@@ -30,12 +29,17 @@ namespace Breakout
             }
 
             health--;
-            _gameManager.AddScore(points);
+            gameManager.AddScore(points);
 
             switch (health)
             {
                 case <= 0:
                 {
+                    if (transform.parent.childCount <= 1)
+                    {
+                        gameManager.WinGame();
+                    }
+
                     Destroy(gameObject);
                     break;
                 }

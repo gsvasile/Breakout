@@ -15,11 +15,13 @@ namespace Breakout.Controllers
         private Rigidbody2D _myRigidBody;
         // Stores direction that the player will move
         private float _direction;
+        private Vector2 _startingPosition;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
             AutoSetRigidBody();
+            _startingPosition = transform.position;
         }
 
         private void AutoSetRigidBody()
@@ -64,6 +66,11 @@ namespace Breakout.Controllers
             {
                 _direction = 0f;
             }
+        }
+
+        public void Reset()
+        {
+            transform.position = _startingPosition;
         }
     }
 }
