@@ -9,6 +9,8 @@ namespace Breakout
         [SerializeField] private PlayerController playerController;
         [SerializeField] private BallController ballController;
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private GameObject winPanel;
+        [SerializeField] private GameObject losePanel;
 
         private int _score;
         private int _lives = 1;
@@ -37,17 +39,28 @@ namespace Breakout
 
         private void GameOver()
         {
-            ballController.RigidBody.linearVelocity = Vector2.zero;
+            PauseGame();
+            losePanel.SetActive(true);
+        }
+
+        private void PauseGame()
+        {
+            playerController.Pause();
+            ballController.Pause();
         }
 
         private void ResetGame()
         {
+            winPanel.SetActive(false);
+            losePanel.SetActive(false);
             playerController.Reset();
             ballController.LaunchBall();
         }
 
         public void WinGame()
         {
+            PauseGame();
+            winPanel.SetActive(true);
         }
     }
 }

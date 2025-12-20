@@ -8,10 +8,8 @@ namespace Breakout.Controllers
         [SerializeField] private float speed = 2;
         [SerializeField] private GameManager gameManager;
 
-        private Rigidbody2D _myRigidBody;
+        private Rigidbody2D _rigidbody;
         private Vector2 _startingPosition;
-        
-        public Rigidbody2D RigidBody => _myRigidBody;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
@@ -23,10 +21,10 @@ namespace Breakout.Controllers
 
         private void AutoSetRigidBody()
         {
-            var rigidBoy = GetComponent<Rigidbody2D>();
-            if (rigidBoy)
+            var rigidBody = GetComponent<Rigidbody2D>();
+            if (rigidBody)
             {
-                _myRigidBody = rigidBoy;
+                _rigidbody = rigidBody;
             }
         }
 
@@ -53,12 +51,12 @@ namespace Breakout.Controllers
                 }
             }
 
-            _myRigidBody.linearVelocity = new Vector2(x, y) * speed;
+            _rigidbody.linearVelocity = new Vector2(x, y) * speed;
         }
 
         private void FixedUpdate()
         {
-            _myRigidBody.linearVelocity = _myRigidBody.linearVelocity.normalized * speed;
+            _rigidbody.linearVelocity = _rigidbody.linearVelocity.normalized * speed;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -69,6 +67,11 @@ namespace Breakout.Controllers
             }
 
             gameManager.PlayerDied();
+        }
+
+        public void Pause()
+        {
+            _rigidbody.linearVelocity = Vector2.zero;
         }
     }
 }

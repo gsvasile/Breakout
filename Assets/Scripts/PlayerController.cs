@@ -16,6 +16,7 @@ namespace Breakout.Controllers
         // Stores direction that the player will move
         private float _direction;
         private Vector2 _startingPosition;
+        private bool _isGamePaused;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
@@ -46,6 +47,11 @@ namespace Breakout.Controllers
 
         private void PlayerInput()
         {
+            if (_isGamePaused)
+            {
+                return;
+            }
+
             var kb = Keyboard.current;
             if (kb == null)
             {
@@ -71,6 +77,11 @@ namespace Breakout.Controllers
         public void Reset()
         {
             transform.position = _startingPosition;
+        }
+
+        public void Pause()
+        {
+            _isGamePaused = true;
         }
     }
 }
