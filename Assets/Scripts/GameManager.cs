@@ -67,6 +67,7 @@ namespace Breakout
 
         public void ReloadScene()
         {
+            playerController.Resume();
             SceneManager.LoadScene(_startingSceneName);
         }
     }

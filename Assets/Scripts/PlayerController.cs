@@ -37,6 +37,11 @@ namespace Breakout.Controllers
         // Update is called once per frame
         private void Update()
         {
+            if (_isGamePaused)
+            {
+                return;
+            }
+
             PlayerInput();
         }
 
@@ -47,11 +52,6 @@ namespace Breakout.Controllers
 
         private void PlayerInput()
         {
-            if (_isGamePaused)
-            {
-                return;
-            }
-
             var kb = Keyboard.current;
             if (kb == null)
             {
@@ -82,6 +82,11 @@ namespace Breakout.Controllers
         public void Pause()
         {
             _isGamePaused = true;
+        }
+
+        public void Resume()
+        {
+            _isGamePaused = false;
         }
     }
 }
