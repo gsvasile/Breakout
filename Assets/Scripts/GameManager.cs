@@ -1,6 +1,7 @@
 using Breakout.Controllers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Breakout
 {
@@ -14,6 +15,7 @@ namespace Breakout
 
         private int _score;
         private int _lives = 1;
+        private readonly string _startingSceneName = "Breakout";
 
         public void AddScore(int points)
         {
@@ -61,6 +63,11 @@ namespace Breakout
         {
             PauseGame();
             winPanel.SetActive(true);
+        }
+
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(_startingSceneName);
         }
     }
 }
